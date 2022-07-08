@@ -1,8 +1,14 @@
 import React from "react";
+import { Seo } from "../components/Seo";
 
 class IndexPage extends React.Component {
 	render(): React.ReactNode {
-		return <h1>Index page</h1>;
+		return (
+			<>
+				<Seo title={"Griffen Schwiesow"} />
+				<h1>Index page</h1>
+			</>
+		);
 	}
 }
 
