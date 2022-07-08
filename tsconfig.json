@@ -8,13 +8,15 @@
 		"moduleResolution": "Node",
 		"skipLibCheck": true,
 		"strict": true,
-		"target": "ESNext"
+		"target": "ESNext",
+		"types": ["node", "jest"]
 	},
 	"include": [
 		"./gatsby-browser.tsx",
 		"./gatsby-config.ts",
 		"./gatsby-node.ts",
 		"./gatsby-ssr.tsx",
+		"./jest/**/*",
 		"./plugins/**/*",
 		"./src/**/*"
 	]
