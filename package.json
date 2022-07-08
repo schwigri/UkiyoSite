@@ -11,13 +11,15 @@
 		"cy:run": "cypress run",
 		"develop": "gatsby develop",
 		"serve": "gatsby serve",
+		"start": "gatsby serve",
 		"test": "jest",
 		"test:unit": "jest",
-		"test:e2e": "start-server-and-test develop http://localhost:8000 cy:open",
-		"test:e2e:ci": "start-server-and-test develop http://localhost:8000 cy:run",
+		"test:e2e": "NODE_ENV=development start-server-and-test develop http://localhost:8000 cy:open",
+		"test:e2e:ci": "npm run cy:run",
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
+		"dotenv": "^16.0.1",
 		"gatsby": "^4.18.0",
 		"gatsby-plugin-react-helmet": "^5.18.0",
 		"react": "^18.1.0",
