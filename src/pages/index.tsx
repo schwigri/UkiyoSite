@@ -1,9 +1,8 @@
 import React from "react";
-import type { PageProps } from "gatsby";
 
-class IndexPage extends React.Component<PageProps> {
+class IndexPage extends React.Component {
 	render(): React.ReactNode {
-		return <span>Index page</span>;
+		return <h1>Index page</h1>;
 	}
 }
 
