@@ -9,7 +9,7 @@
 		"skipLibCheck": true,
 		"strict": true,
 		"target": "ESNext",
-		"types": ["node", "jest"]
+		"types": ["node", "jest", "cypress", "cypress-axe", "cypress/react"]
 	},
 	"include": [
 		"./gatsby-browser.tsx",
