@@ -6,3 +6,4 @@ src/gatsby-types.d.ts
 .env.*
 cypress/screenshots
 cypress/videos
+coverage

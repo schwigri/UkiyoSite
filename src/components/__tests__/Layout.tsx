@@ -16,4 +16,14 @@ describe("<Layout>", () => {
 		);
 		expect(screen.getByRole("article")).toHaveTextContent("This is a test");
 	});
+
+	it("should render a header", () => {
+		render(<Layout />);
+		expect(screen.getByRole("banner")).toBeInTheDocument();
+	});
+
+	it("should render a footer", () => {
+		render(<Layout />);
+		expect(screen.getByRole("contentinfo")).toBeInTheDocument();
+	});
 });
