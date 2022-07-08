@@ -5,5 +5,6 @@ interface IWrapPageElementProps {
 	element: React.ReactNode;
 }
 
-export const wrapPageElement = ({ element }: IWrapPageElementProps): React.ReactElement =>
-	<Layout>{element}</Layout>;
+export const wrapPageElement = ({
+	element,
+}: IWrapPageElementProps): React.ReactElement => <Layout>{element}</Layout>;

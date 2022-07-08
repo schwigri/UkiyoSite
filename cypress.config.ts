@@ -3,7 +3,7 @@ import { defineConfig } from "cypress";
 
 dotenv.config({
 	path: `.env.${process.env.NODE_ENV}`,
-})
+});
 
 const config = defineConfig({
 	e2e: {

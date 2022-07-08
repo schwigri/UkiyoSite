@@ -10,9 +10,7 @@ class Seo extends React.Component<ISeoProps> {
 	render(): React.ReactNode {
 		const { lang, title } = this.props;
 
-		return (
-			<Helmet htmlAttributes={{ lang: lang || "en" }} title={title} />
-		);
+		return <Helmet htmlAttributes={{ lang: lang || "en" }} title={title} />;
 	}
 }
 
