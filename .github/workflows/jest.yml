@@ -13,4 +13,6 @@ jobs:
               with:
                   node-version: 16.16.0
             - run: npm ci
-            - run: npm test
+            - run: npm test -- --coverage
+            - name: Upload coverage
+              uses: codecov/codecov-action@v3
