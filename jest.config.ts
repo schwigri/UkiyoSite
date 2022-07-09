@@ -12,14 +12,13 @@ const config: Config.InitialOptions = {
 	setupFiles: ["<rootDir>/jest/loadershim.ts"],
 	setupFilesAfterEnv: ["<rootDir>/jest/setup-test-env.ts"],
 	testEnvironment: "jsdom",
-	testEnvironmentOptions: {
-		url: "http://localhost",
-	},
-	testPathIgnorePatterns: ["node_modules", "\\.cache", "<rootDir>/public"],
+	testPathIgnorePatterns: ["node_modules", "\\.cache", "<rootDir>.*/public"],
 	transform: {
 		"^.+\\.tsx?$": "<rootDir>/jest/preprocess.ts",
 	},
-	transformIgnorePatterns: ["node_modules/(?!(gatsby|gatsby-script)/)"],
+	transformIgnorePatterns: [
+		"node_modules/(?!(gatsby|gatsby-script|gatsby-link)/)",
+	],
 };
 
 export default config;

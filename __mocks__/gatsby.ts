@@ -20,7 +20,15 @@ export default {
 				...rest
 			}) => React.createElement("a", { ...rest, href: to })
 		),
-	StaticQuery: jest.fn(),
+	StaticQuery: jest.fn((mock) =>
+		mock.render({
+			site: {
+				siteMetadata: {
+					title: "Test title",
+				},
+			},
+		})
+	),
 	graphql: jest.fn(),
 	useStaticQuery: jest.fn(),
 };
