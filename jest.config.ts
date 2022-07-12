@@ -17,7 +17,7 @@ const config: Config.InitialOptions = {
 		"^.+\\.tsx?$": "<rootDir>/jest/preprocess.ts",
 	},
 	transformIgnorePatterns: [
-		"node_modules/(?!(gatsby|gatsby-script|gatsby-link)/)",
+		"/node_modules/(?!(gatsby|gatsby-script|gatsby-link)/)",
 	],
 };
 

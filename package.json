@@ -21,9 +21,16 @@
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
+		"@fontsource/atkinson-hyperlegible": "^4.5.7",
+		"@fontsource/prompt": "^4.5.8",
+		"@vanilla-extract/babel-plugin": "^1.1.7",
+		"@vanilla-extract/css": "^1.7.2",
+		"@vanilla-extract/webpack-plugin": "^2.1.11",
 		"dotenv": "^16.0.1",
 		"gatsby": "^4.18.0",
 		"gatsby-plugin-react-helmet": "^5.18.0",
+		"gatsby-plugin-vanilla-extract": "^2.0.1",
+		"prop-types": "^15.8.1",
 		"react": "^18.1.0",
 		"react-dom": "^18.1.0",
 		"react-helmet": "^6.1.0"

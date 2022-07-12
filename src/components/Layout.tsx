@@ -1,6 +1,9 @@
 import { Footer } from "./Footer";
 import { Header } from "./Header";
+import { Link } from "./Link";
+import { Main } from "./Main";
 import React from "react";
+import { skipToContentLink } from "../styles";
 
 interface ILayoutProps {
 	children?: React.ReactNode;
@@ -12,9 +15,15 @@ class Layout extends React.Component<ILayoutProps> {
 
 		return (
 			<>
-				<Header />
+				<Link className={skipToContentLink} href={"#content"}>
+					Skip to content
+				</Link>
 
-				<main>{children}</main>
+				<Header>
+					Page hero can go here
+				</Header>
+
+				<Main>{children}</Main>
 
 				<Footer />
 			</>
