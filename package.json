@@ -1,7 +1,7 @@
 {
-	"name": "@schwigri/hauptbahnhof",
+	"name": "@schwigri/ukiyo-site",
 	"private": true,
-	"description": "\"Main station\" for my personal website",
+	"description": "Enjoy the beauty of the moment",
 	"license": "MPL-2.0",
 	"author": "Griffen Schwiesow",
 	"scripts": {
