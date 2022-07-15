@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"baseUrl": "",
+		"baseUrl": ".",
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
 		"jsx": "react",
@@ -10,7 +10,15 @@
 		"skipLibCheck": true,
 		"strict": true,
 		"target": "ESNext",
-		"types": ["node", "jest"]
+		"types": [
+			"node",
+			"jest",
+			"cypress",
+			"./cypress/support",
+			"cypress-axe",
+			"cypress/react",
+			"@testing-library/cypress"
+		]
 	},
 	"include": [
 		"./gatsby-browser.tsx",

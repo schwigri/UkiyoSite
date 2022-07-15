@@ -1,7 +1,12 @@
 {
 	"compilerOptions": {
-		"baseUrl": "",
-		"types": ["node", "cypress", "cypress-axe", "cypress/react", "@testing-library/cypress"]
+		"types": [
+			"cypress",
+			"./support",
+			"cypress-axe",
+			"cypress/react",
+			"@testing-library/cypress"
+		]
 	},
 	"extends": "../tsconfig.json",
 	"include": ["./**/*.ts"]

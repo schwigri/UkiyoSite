@@ -14,6 +14,30 @@ const config = defineConfig({
 	},
 	e2e: {
 		baseUrl: process.env.E2E_BASE_URL || "http://localhost:9000",
+		screenshotsFolder: process.env.CYPRESS_DARK_MODE
+			? "./cypress/screenshots/darkMode/"
+			: "./cypress/screenshots",
+		setupNodeEvents: (on, config) => {
+			on("before:browser:launch", (browser, options) => {
+				if (browser.family === "chromium" && config.env.DARK_MODE) {
+					console.log("PUSHING FLAG!!!");
+					options.args.push("--force-dark-mode=true");
+					options.args.push("--enable-force-dark=true");
+					console.log(options.args);
+					return options;
+				}
+			});
+
+			return {
+				...config,
+				browsers: config.browsers.filter((browser) =>
+					config.env.DARK_MODE ? browser.name !== "electron" : true
+				),
+			};
+		},
+		videosFolder: process.env.CYPRESS_DARK_MODE
+			? "./cypress/videos/darkMode/"
+			: "./cypress/videos",
 	},
 });
 

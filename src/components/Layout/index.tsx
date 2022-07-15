@@ -1,20 +1,20 @@
-import { Footer } from "../Footer";
-import { Header } from "../Header";
+import { Footer, Header, Main } from "../";
 import React from "react";
 
 interface ILayoutProps {
 	children?: React.ReactNode;
+	isHome?: boolean;
 }
 
 class Layout extends React.Component<ILayoutProps> {
 	render(): React.ReactNode {
-		const { children } = this.props;
+		const { children, isHome } = this.props;
 
 		return (
 			<>
-				<Header />
+				<Header isHome={isHome} />
 
-				<main>{children}</main>
+				<Main>{children}</Main>
 
 				<Footer />
 			</>

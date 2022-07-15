@@ -1,10 +1,14 @@
-import { Layout } from "../components/Layout";
+import type { GatsbyBrowser, GatsbySSR } from "gatsby";
+import { LocaleContext, getLocale } from "./localization";
+import { Layout } from "../components";
 import React from "react";
 
-interface IWrapPageElementProps {
-	element: React.ReactNode;
-}
-
-export const wrapPageElement = ({
-	element,
-}: IWrapPageElementProps): React.ReactElement => <Layout>{element}</Layout>;
+export const wrapPageElement:
+	| GatsbyBrowser["wrapPageElement"]
+	| GatsbySSR["wrapPageElement"] = ({ element, props }) => (
+	<LocaleContext.Provider
+		value={{ locale: getLocale(props.pageContext.locale) }}
+	>
+		<Layout isHome={!!props.pageContext.isHome}>{element}</Layout>
+	</LocaleContext.Provider>
+);

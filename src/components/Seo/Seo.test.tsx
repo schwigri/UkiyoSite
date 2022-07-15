@@ -1,7 +1,15 @@
+import { Locale, LocaleContext } from "../../utils/localization";
 import { Helmet } from "react-helmet";
 import React from "react";
 import { Seo } from "./";
-import { render } from "@testing-library/react";
+import { render as testingLibraryRender } from "@testing-library/react";
+
+const render: typeof testingLibraryRender = (ui: React.ReactElement) =>
+	testingLibraryRender(
+		<LocaleContext.Provider value={{ locale: Locale.enUs }}>
+			{ui}
+		</LocaleContext.Provider>
+	);
 
 describe("<Seo>", () => {
 	it("should set the document title", () => {
@@ -20,5 +28,13 @@ describe("<Seo>", () => {
 		render(<Seo lang={"ja"} title={"テストのタイトル"} />);
 		const helmet = Helmet.peek();
 		expect(helmet.htmlAttributes?.lang).toBe("ja");
+	});
+
+	it("should set the metadata description", () => {
+		render(<Seo description={"Test description"} title={"Test title"} />);
+		const helmet = Helmet.peek();
+		expect(
+			helmet.metaTags.find((metaTag) => metaTag.name === "description")
+		).toHaveProperty("content", "Test description");
 	});
 });
