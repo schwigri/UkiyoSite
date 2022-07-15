@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet";
 import React from "react";
-import { Seo } from "../Seo";
+import { Seo } from "./";
 import { render } from "@testing-library/react";
 
 describe("<Seo>", () => {

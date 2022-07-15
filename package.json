@@ -9,15 +9,16 @@
 		"clean": "gatsby clean",
 		"cy:open": "cypress open",
 		"cy:run": "cypress run",
+		"cy:run:component": "cypress run --component",
 		"develop": "gatsby develop",
 		"lint": "eslint",
 		"postinstall": "husky install",
 		"serve": "gatsby serve",
 		"start": "gatsby serve",
 		"test": "jest",
-		"test:unit": "jest",
-		"test:e2e": "NODE_ENV=development start-server-and-test develop http://localhost:8000 cy:open",
-		"test:e2e:ci": "npm run cy:run",
+		"test:cypress": "NODE_ENV=development start-server-and-test develop http://localhost:8000 cy:open",
+		"test:e2e:ci": "start-server-and-test serve http://localhost:9000 cy:run",
+		"test:component:ci": "start-server-and-test serve http://localhost:9000 cy:run:component",
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
@@ -37,13 +38,18 @@
 		"@types/react": "^18.0.14",
 		"@types/react-dom": "^18.0.5",
 		"@types/react-helmet": "^6.1.5",
+		"@types/testing-library__cypress": "^5.0.9",
+		"@types/testing-library__jest-dom": "^5.14.5",
+		"@types/testing-library__react": "^10.2.0",
 		"axe-core": "^4.4.2",
 		"babel-jest": "^28.1.2",
 		"babel-preset-gatsby": "^2.18.0",
+		"create-react-app": "^5.0.1",
 		"cypress": "^10.3.0",
 		"cypress-axe": "^1.0.0",
 		"eslint": "^7.32.0",
 		"eslint-config-prettier": "^8.5.0",
+		"eslint-plugin-cypress": "^2.12.1",
 		"eslint-plugin-jest-dom": "^4.0.2",
 		"eslint-plugin-prettier": "^4.2.1",
 		"eslint-plugin-testing-library": "^3.10.2",
@@ -52,8 +58,13 @@
 		"jest": "^28.1.2",
 		"jest-environment-jsdom": "^28.1.2",
 		"prettier": "^2.7.1",
+		"react-scripts": "^5.0.1",
 		"start-server-and-test": "^1.14.0",
 		"ts-node": "^10.8.2",
 		"typescript": "^4.7.4"
-	}
+	},
+	"browserslist": [
+		">0.25%",
+		"not dead"
+	]
 }
