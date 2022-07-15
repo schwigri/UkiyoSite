@@ -1,5 +1,5 @@
-import * as layout from "./src/utils/layout";
-import type { GatsbyBrowser } from "gatsby";
+import "@fontsource/atkinson-hyperlegible";
+import "@fontsource/prompt/600.css";
+import { wrapPageElement } from "./src/utils/layout";
 
-export const wrapPageElement: GatsbyBrowser["wrapPageElement"] =
-	layout.wrapPageElement;
+export { wrapPageElement };

@@ -17,9 +17,11 @@ const config: Config.InitialOptions = {
 	},
 	testPathIgnorePatterns: ["node_modules", "\\.cache", "<rootDir>/public"],
 	transform: {
-		"^.+\\.tsx?$": "<rootDir>/jest/preprocess.ts",
+		"^.+\\.(t|j)sx?$": "<rootDir>/jest/preprocess.ts",
 	},
-	transformIgnorePatterns: ["node_modules/(?!(gatsby|gatsby-script)/)"],
+	transformIgnorePatterns: [
+		"node_modules/(?!(gatsby|gatsby-script|gatsby-link)/)",
+	],
 };
 
 export default config;

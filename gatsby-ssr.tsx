@@ -1,5 +1,5 @@
-import * as layout from "./src/utils/layout";
-import type { GatsbySSR } from "gatsby";
+import "@fontsource/atkinson-hyperlegible";
+import "@fontsource/prompt";
+import { wrapPageElement } from "./src/utils/layout";
 
-export const wrapPageElement: GatsbySSR["wrapPageElement"] =
-	layout.wrapPageElement;
+export { wrapPageElement };

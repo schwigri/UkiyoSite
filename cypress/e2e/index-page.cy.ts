@@ -1,7 +1,6 @@
 describe("IndexPage", () => {
-	beforeEach(() => cy.visit("/").get("main").injectAxe());
-
 	it("has no detectable accessibility violations", () => {
+		cy.visit("/").get("main").injectAxe();
 		cy.checkA11y();
 	});
 });
