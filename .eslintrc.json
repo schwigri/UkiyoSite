@@ -19,10 +19,20 @@
 				"@typescript-eslint/ban-ts-comment": "off",
 				"@typescript-eslint/no-var-requires": "off"
 			}
+		},
+		{
+			"extends": ["plugin:cypress/recommended"],
+			"files": ["cypress/**/*.ts"],
+			"rules": {
+				"@typescript-eslint/no-namespace": "off"
+			}
 		}
 	],
 	"parser": "@typescript-eslint/parser",
 	"plugins": ["@typescript-eslint", "react"],
+	"rules": {
+		"sort-imports": "error"
+	},
 	"settings": {
 		"react": {
 			"version": "detect"
