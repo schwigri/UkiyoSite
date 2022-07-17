@@ -5,7 +5,17 @@ const config: GatsbyConfig = {
 		title: "Griffen Schwiesow",
 	},
 	graphqlTypegen: true,
-	plugins: ["gatsby-plugin-react-helmet"],
+	plugins: [
+		"gatsby-plugin-react-helmet",
+		{
+			resolve: "gatsby-source-filesystem",
+			options: {
+				name: "content",
+				path: `${__dirname}/content/src`,
+			},
+		},
+		"gatsby-transformer-remark",
+	],
 };
 
 export default config;
