@@ -6,12 +6,19 @@ jobs:
     jest-run:
         runs-on: ubuntu-latest
         steps:
+            - uses: shaunco/ssh-agent@git-repo-mapping
+              with:
+                  ssh-private-key: |
+                    ${{ secrets.UKIYO_CONTENT_SSH_KEY }}
+                  repo-mappings: |
+                    github.com/schwigri/UkiyoContent
             - name: Checkout
               uses: actions/checkout@v2
             - name: Setup Node.js
               uses: actions/setup-node@v3
               with:
                   node-version: 16.16.0
+                  submodules: recursive
             - run: npm ci
             - run: npm test -- --coverage
             - name: Upload coverage
