@@ -3,16 +3,15 @@ import React from "react";
 
 interface ILayoutProps {
 	children?: React.ReactNode;
-	isHome?: boolean;
 }
 
 class Layout extends React.Component<ILayoutProps> {
 	render(): React.ReactNode {
-		const { children, isHome } = this.props;
+		const { children } = this.props;
 
 		return (
 			<>
-				<Header isHome={isHome} />
+				<Header />
 
 				<Main>{children}</Main>
 

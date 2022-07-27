@@ -20,10 +20,8 @@ const config = defineConfig({
 		setupNodeEvents: (on, config) => {
 			on("before:browser:launch", (browser, options) => {
 				if (browser.family === "chromium" && config.env.DARK_MODE) {
-					console.log("PUSHING FLAG!!!");
 					options.args.push("--force-dark-mode=true");
 					options.args.push("--enable-force-dark=true");
-					console.log(options.args);
 					return options;
 				}
 			});
@@ -31,7 +29,9 @@ const config = defineConfig({
 			return {
 				...config,
 				browsers: config.browsers.filter((browser) =>
-					config.env.DARK_MODE ? browser.name !== "electron" : true
+					config.env.DARK_MODE && config.browsers.length > 1
+						? browser.name !== "electron"
+						: true
 				),
 			};
 		},

@@ -1,14 +1,15 @@
-import { Locale, LocaleContext } from "../../utils/localization";
 import { render, screen } from "@testing-library/react";
+import { ContextProvider } from "../../utils/context";
 import { Layout } from "./";
+import { Locale } from "../../utils/localization";
 import React from "react";
 
 describe("<Layout>", () => {
 	it("should render a main region", () => {
 		render(
-			<LocaleContext.Provider value={{ locale: Locale.enUs }}>
+			<ContextProvider value={{ locale: Locale.enUs }}>
 				<Layout />
-			</LocaleContext.Provider>
+			</ContextProvider>
 		);
 		expect(screen.getByRole("main")).toBeInTheDocument();
 	});

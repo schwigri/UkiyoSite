@@ -1,14 +1,15 @@
-import { Locale, LocaleContext } from "../../utils/localization";
 import { render, screen } from "@testing-library/react";
+import { ContextProvider } from "../../utils/context";
 import { Header } from "./";
+import { Locale } from "../../utils/localization";
 import React from "react";
 
 describe("<Header>", () => {
 	it("should render a header", () => {
 		render(
-			<LocaleContext.Provider value={{ locale: Locale.enUs }}>
+			<ContextProvider value={{ locale: Locale.enUs }}>
 				<Header />
-			</LocaleContext.Provider>
+			</ContextProvider>
 		);
 		expect(screen.getByRole("banner")).toBeInTheDocument();
 	});

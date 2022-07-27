@@ -1,13 +1,14 @@
-import { Locale, LocaleContext } from "../../utils/localization";
 import { Branding } from "./";
+import { ContextProvider } from "src/utils/context";
+import { Locale } from "../../utils/localization";
 import React from "react";
 
 describe("<Branding>", () => {
 	it("should show the logo", () => {
 		cy.mount(
-			<LocaleContext.Provider value={{ locale: Locale.enUs }}>
+			<ContextProvider value={{ locale: Locale.enUs }}>
 				<Branding />
-			</LocaleContext.Provider>
+			</ContextProvider>
 		)
 			.get("img")
 			.should("be.visible");
@@ -15,9 +16,9 @@ describe("<Branding>", () => {
 
 	it("should render an h1 on home pages", () => {
 		cy.mount(
-			<LocaleContext.Provider value={{ locale: Locale.enUs }}>
-				<Branding isHome={true} />
-			</LocaleContext.Provider>
+			<ContextProvider value={{ isHome: true, locale: Locale.enUs }}>
+				<Branding />
+			</ContextProvider>
 		)
 			.get("h1")
 			.should("be.visible")
@@ -26,9 +27,9 @@ describe("<Branding>", () => {
 
 	it("should render a span on non-home pages", () => {
 		cy.mount(
-			<LocaleContext.Provider value={{ locale: Locale.enUs }}>
+			<ContextProvider value={{ locale: Locale.enUs }}>
 				<Branding />
-			</LocaleContext.Provider>
+			</ContextProvider>
 		)
 			.get("span")
 			.should("be.visible")
