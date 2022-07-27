@@ -20,7 +20,12 @@ const config: GatsbyConfig = {
 				path: `${__dirname}/content/src`,
 			},
 		},
-		"gatsby-transformer-remark",
+		{
+			resolve: "gatsby-plugin-mdx",
+			options: {
+				extensions: [".md", ".mdx"],
+			},
+		},
 		"gatsby-plugin-image",
 		"gatsby-plugin-sharp",
 		"gatsby-transformer-sharp",

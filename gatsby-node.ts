@@ -15,7 +15,7 @@ export interface ICreatePagesQueryDataAllMarkdownRemarkNode {
 }
 
 export interface ICreatePagesQueryData {
-	allMarkdownRemark: {
+	allMdx: {
 		nodes: Array<ICreatePagesQueryDataAllMarkdownRemarkNode>;
 	};
 }
@@ -28,9 +28,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
 
 	const result = await graphql<ICreatePagesQueryData>(`
 		{
-			allMarkdownRemark(
-				sort: { fields: [frontmatter___date], order: DESC }
-			) {
+			allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
 				nodes {
 					frontmatter {
 						date
@@ -48,8 +46,8 @@ export const createPages: GatsbyNode["createPages"] = async ({
 		throw result.errors;
 	}
 
-	const all = result.data?.allMarkdownRemark.nodes;
-	const homes = all?.filter((item) => item.frontmatter.template === "home");
+	const all = result.data?.allMdx.nodes;
+	const homes = all?.filter((node) => node.frontmatter.template === "home");
 
 	const createPagesHelper = (
 		nodes: Array<ICreatePagesQueryDataAllMarkdownRemarkNode>,

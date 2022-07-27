@@ -6,7 +6,7 @@ import { graphql } from "gatsby";
 
 interface IHomeTemplateProps {
 	data: {
-		markdownRemark: {
+		mdx: {
 			frontmatter: {
 				seo?: {
 					description?: string;
@@ -20,7 +20,7 @@ interface IHomeTemplateProps {
 
 class HomeTemplate extends React.Component<IHomeTemplateProps> {
 	render(): React.ReactNode {
-		const { frontmatter } = this.props.data.markdownRemark;
+		const { frontmatter } = this.props.data.mdx;
 		const { seo, title } = frontmatter;
 
 		return (
@@ -50,7 +50,7 @@ export default HomeTemplate;
 
 export const query = graphql`
 	query HomeTemplateQuery($id: String!) {
-		markdownRemark(id: { eq: $id }) {
+		mdx(id: { eq: $id }) {
 			frontmatter {
 				seo {
 					description
