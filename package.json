@@ -9,7 +9,7 @@
 		"clean": "gatsby clean",
 		"cy:open": "cypress open",
 		"cy:run": "cypress run",
-		"cy:run:dark-mode": "CYPRESS_DARK_MODE=true cypress run --browser chromium",
+		"cy:run:dark-mode": "CYPRESS_DARK_MODE=true cypress run",
 		"cy:run:component": "cypress run --component",
 		"develop": "gatsby develop",
 		"lint": "eslint",

@@ -1,14 +1,51 @@
-import type { GatsbyBrowser, GatsbySSR } from "gatsby";
-import { LocaleContext, getLocale } from "./localization";
+import { ILocalizedNodeData, Locale } from "./localization";
+import type {
+	PluginOptions,
+	WrapPageElementBrowserArgs,
+	WrapPageElementNodeArgs,
+} from "gatsby";
+import { ContextProvider } from "./context";
 import { Layout } from "../components";
 import React from "react";
 
-export const wrapPageElement:
-	| GatsbyBrowser["wrapPageElement"]
-	| GatsbySSR["wrapPageElement"] = ({ element, props }) => (
-	<LocaleContext.Provider
-		value={{ locale: getLocale(props.pageContext.locale) }}
+export interface IPageContextArgs {
+	id: string;
+	isHome?: boolean;
+	locale: Locale;
+	localizations?: Array<ILocalizedNodeData>;
+}
+
+interface IWrapPageElementBrowserArgs
+	extends WrapPageElementBrowserArgs<
+		Record<string, unknown>,
+		IPageContextArgs,
+		unknown
+	> {}
+
+interface IWrapPageElementNodeArgs
+	extends WrapPageElementNodeArgs<
+		Record<string, unknown>,
+		IPageContextArgs
+	> {}
+
+type WrapPageElement = {
+	(
+		args: IWrapPageElementBrowserArgs,
+		options: PluginOptions
+	): React.ReactElement;
+	(
+		args: IWrapPageElementNodeArgs,
+		options: PluginOptions
+	): React.ReactElement;
+};
+
+export const wrapPageElement: WrapPageElement = ({ element, props }) => (
+	<ContextProvider
+		value={{
+			isHome: props.pageContext.isHome,
+			locale: props.pageContext.locale,
+		}}
 	>
-		<Layout isHome={!!props.pageContext.isHome}>{element}</Layout>
-	</LocaleContext.Provider>
+		<Layout>{element}</Layout>
+	</ContextProvider>
 );

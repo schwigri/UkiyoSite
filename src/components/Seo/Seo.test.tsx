@@ -1,14 +1,13 @@
-import { Locale, LocaleContext } from "../../utils/localization";
+import { ContextProvider } from "../../utils/context";
 import { Helmet } from "react-helmet";
+import { Locale } from "../../utils/localization";
 import React from "react";
 import { Seo } from "./";
 import { render as testingLibraryRender } from "@testing-library/react";
 
-const render: typeof testingLibraryRender = (ui: React.ReactElement) =>
+const render = (ui: React.ReactElement) =>
 	testingLibraryRender(
-		<LocaleContext.Provider value={{ locale: Locale.enUs }}>
-			{ui}
-		</LocaleContext.Provider>
+		<ContextProvider value={{ locale: Locale.enUs }}>{ui}</ContextProvider>
 	);
 
 describe("<Seo>", () => {

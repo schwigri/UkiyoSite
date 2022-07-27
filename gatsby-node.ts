@@ -1,47 +1,24 @@
 import type { GatsbyNode } from "gatsby";
-import { Locale } from "./src/utils/localization";
+import { IPageContextArgs } from "src/utils/layout";
+import { getLocalizedNodeData } from "./src/utils/localization";
 import path from "path";
-import slugify from "slugify";
 
-const getLocale = (item: any): Locale => {
-	switch (item.frontmatter?.locale) {
-		default:
-			return Locale.enUs;
-	}
-};
+export interface ICreatePagesQueryDataAllMarkdownRemarkNode {
+	frontmatter: {
+		date?: string;
+		locale?: string;
+		slug?: string;
+		template?: string;
+		uid?: string;
+	};
+	id: string;
+}
 
-const getSlugPrefix = (locale: Locale): string => {
-	switch (locale) {
-		case Locale.deCh:
-			return "/de/";
-
-		case Locale.jaJp:
-			return "/ja/";
-
-		default:
-			return "/";
-	}
-};
-
-const getSlug = (item: any): string => {
-	if (item.frontmatter?.template !== "home" && !item.frontmatter?.id) {
-		throw new Error("non-home item is missing id");
-	}
-
-	const locale = getLocale(item);
-	const prefix = getSlugPrefix(locale);
-	const uid = slugify(item.frontmatter?.id, {
-		locale: locale.substring(0, 2),
-	});
-
-	switch (item.frontmatter?.template) {
-		case "home":
-			return prefix;
-
-		default:
-			return `${prefix}${uid}`;
-	}
-};
+export interface ICreatePagesQueryData {
+	allMarkdownRemark: {
+		nodes: Array<ICreatePagesQueryDataAllMarkdownRemarkNode>;
+	};
+}
 
 export const createPages: GatsbyNode["createPages"] = async ({
 	actions,
@@ -49,7 +26,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
 }) => {
 	const { createPage } = actions;
 
-	const result = await graphql(`
+	const result = await graphql<ICreatePagesQueryData>(`
 		{
 			allMarkdownRemark(
 				sort: { fields: [frontmatter___date], order: DESC }
@@ -57,8 +34,9 @@ export const createPages: GatsbyNode["createPages"] = async ({
 				nodes {
 					frontmatter {
 						date
+						slug
 						template
-						id
+						uid
 					}
 					id
 				}
@@ -70,16 +48,38 @@ export const createPages: GatsbyNode["createPages"] = async ({
 		throw result.errors;
 	}
 
-	const all = result.data.allMarkdownRemark.nodes;
-	const homes = all.filter((item) => item.frontmatter.template === "home");
+	const all = result.data?.allMarkdownRemark.nodes;
+	const homes = all?.filter((item) => item.frontmatter.template === "home");
 
-	homes.forEach((home) => {
-		const slug = getSlug(home);
+	const createPagesHelper = (
+		nodes: Array<ICreatePagesQueryDataAllMarkdownRemarkNode>,
+		component: string,
+		options?: { isHome?: boolean }
+	): void => {
+		nodes.forEach((node) => {
+			const { locale, slug } = getLocalizedNodeData(node);
+			const localizations = all
+				?.filter(
+					(otherNode) =>
+						otherNode.frontmatter.uid === node.frontmatter.uid
+				)
+				.map(getLocalizedNodeData);
 
-		createPage({
-			component: path.resolve("./src/templates/home.tsx"),
-			context: { id: home.id, isHome: true, locale: getLocale(home) },
-			path: slug,
+			createPage<IPageContextArgs>({
+				component,
+				context: {
+					id: node.id,
+					isHome: options?.isHome,
+					locale,
+					localizations,
+				},
+				path: slug,
+			});
 		});
+	};
+
+	if (!homes) throw new Error("there are no homepages");
+	createPagesHelper(homes, path.resolve("./src/templates/home.tsx"), {
+		isHome: true,
 	});
 };

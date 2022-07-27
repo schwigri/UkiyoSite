@@ -1,6 +1,7 @@
-import { LocaleContext, getLang } from "../../utils/localization";
+import { ContextConsumer } from "../../utils/context";
 import { Helmet } from "react-helmet";
 import React from "react";
+import { getLang } from "../../utils/localization";
 
 interface ISeoProps {
 	description?: string;
@@ -25,7 +26,7 @@ class Seo extends React.Component<ISeoProps> {
 		}
 
 		return (
-			<LocaleContext.Consumer>
+			<ContextConsumer>
 				{({ locale }) => (
 					<Helmet
 						htmlAttributes={{ lang: lang || getLang(locale) }}
@@ -33,7 +34,7 @@ class Seo extends React.Component<ISeoProps> {
 						meta={[...optionalMetaItems]}
 					/>
 				)}
-			</LocaleContext.Consumer>
+			</ContextConsumer>
 		);
 	}
 }

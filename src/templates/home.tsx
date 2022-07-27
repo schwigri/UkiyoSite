@@ -1,5 +1,5 @@
 import { TranslationString, getTranslatedString } from "src/utils/translation";
-import { LocaleContext } from "../utils/localization";
+import { ContextConsumer } from "../utils/context";
 import React from "react";
 import { Seo } from "../components";
 import { graphql } from "gatsby";
@@ -24,7 +24,7 @@ class HomeTemplate extends React.Component<IHomeTemplateProps> {
 		const { seo, title } = frontmatter;
 
 		return (
-			<LocaleContext.Consumer>
+			<ContextConsumer>
 				{({ locale }) => (
 					<>
 						<Seo
@@ -41,7 +41,7 @@ class HomeTemplate extends React.Component<IHomeTemplateProps> {
 						<span>{title}</span>
 					</>
 				)}
-			</LocaleContext.Consumer>
+			</ContextConsumer>
 		);
 	}
 }

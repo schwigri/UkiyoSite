@@ -8,56 +8,53 @@ import {
 	brandingTitle,
 	brandingTitleShort,
 } from "../../styles";
+import { ContextConsumer } from "../../utils/context";
 import { Link } from "gatsby";
-import { LocaleContext } from "../../utils/localization";
 import React from "react";
 import { StaticImage } from "gatsby-plugin-image";
+import { getSlugPrefix } from "../../utils/localization";
 
-interface IBrandingProps {
-	isHome?: boolean;
-}
-
-class Branding extends React.Component<IBrandingProps> {
+class Branding extends React.Component {
 	render(): React.ReactNode {
-		const { isHome } = this.props;
-
-		const TitleElement = isHome ? "h1" : "span";
-
 		return (
-			<LocaleContext.Consumer>
-				{({ locale }) => (
-					<div className={branding}>
-						<Link
-							aria-label={"Griffen Schwiesow logo"}
-							className={brandingLink}
-							to={"/"}
-						>
-							<StaticImage
-								alt={""}
-								height={40}
-								layout={"fixed"}
-								loading={"eager"}
-								placeholder={"blurred"}
-								src={"../../assets/icon.png"}
-							/>
+			<ContextConsumer>
+				{({ isHome, locale }) => {
+					const TitleElement = isHome ? "h1" : "span";
 
-							<TitleElement className={brandingTitle}>
-								{getTranslatedString(
-									locale,
-									TranslationString.Title
-								)}
-							</TitleElement>
+					return (
+						<div className={branding}>
+							<Link
+								aria-label={"Griffen Schwiesow logo"}
+								className={brandingLink}
+								to={getSlugPrefix(locale)}
+							>
+								<StaticImage
+									alt={""}
+									height={40}
+									layout={"fixed"}
+									loading={"eager"}
+									placeholder={"blurred"}
+									src={"../../assets/icon.png"}
+								/>
 
-							<TitleElement className={brandingTitleShort}>
-								{getTranslatedString(
-									locale,
-									TranslationString.TitleShort
-								)}
-							</TitleElement>
-						</Link>
-					</div>
-				)}
-			</LocaleContext.Consumer>
+								<TitleElement className={brandingTitle}>
+									{getTranslatedString(
+										locale,
+										TranslationString.Title
+									)}
+								</TitleElement>
+
+								<TitleElement className={brandingTitleShort}>
+									{getTranslatedString(
+										locale,
+										TranslationString.TitleShort
+									)}
+								</TitleElement>
+							</Link>
+						</div>
+					);
+				}}
+			</ContextConsumer>
 		);
 	}
 }
